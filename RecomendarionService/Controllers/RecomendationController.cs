@@ -8,17 +8,17 @@ using RecomendarionService.Models.EF;
 
 namespace RecomendarionService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/{id}")]
     [ApiController]
     public class RecomendationController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<Products> Get()
+        public IEnumerable<Products> Get(int id)
         {
             using (var context = new DataProductsContext())
             {
                 //get all authors
-                return context.Products.ToList();
+                return context.Products.Where(d => d.Id == id).ToList();
             }
         }
     }
